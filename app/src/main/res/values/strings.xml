@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">AgeraDemo</string>
+
+    <string name="button_change_color">Change Color</string>
+    <!-- activity list -->
+    <string name="Activity_A">Change Text Color</string>
+    <string name="Activity_B">Load Image</string>
+    <string name="Activity_C">With Fragment</string>
+    <string name="Activity_D">With Recycle View</string>
+    <string name="Activity_E">With View Page</string>
+    <string name="Activity_F">With BaseObservable</string>
+    <string name="Activity_G">With Observable</string>
+
+
+
+
+    <!-- string for label -->
+    <string name="default_label">[Default]</string>
+
+
+    <!-- guide -->
+    <string name="guide_title_1">First Title</string>
+    <string name="guide_description_1" tools:ignore="Typos">description description description</string>
+    <string name="guide_title_2">Second Title</string>
+    <string name="guide_description_2" tools:ignore="Typos">description description description</string>
+    <string name="guide_title_3">Third Title</string>
+    <string name="guide_description_3" tools:ignore="Typos">description description description</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="com.github.captain_miao.agera.tutorial.model.ActInfo"/>
+        <import type="com.github.captain_miao.agera.tutorial.listener.OnViewClickListener"/>
+        <variable name="actInfo" type="ActInfo"/>
+        <variable name="clickListener" type="OnViewClickListener"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:padding="@dimen/activity_horizontal_margin"
+                  android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{actInfo.name ?? @string/app_name, default=@string/app_name}"
+            android:onClick="@{clickListener.onClick}"/>
+    </LinearLayout>
+</layout>

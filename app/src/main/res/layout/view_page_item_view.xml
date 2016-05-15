@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="com.github.captain_miao.agera.tutorial.viewpage.GuideViewModel" />
+        <variable name="viewModel" type="GuideViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@{viewModel.bgColor, default=@color/guide_bg_color_1}">
+
+        <TextView
+            android:layout_marginTop="@dimen/height_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/font_size_title"
+            android:textColor="@color/white"
+            android:text="@{viewModel.title, default=@string/guide_title_1}"/>
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_big"
+            android:layout_marginBottom="@dimen/height_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/font_size_secondary_title"
+            android:textColor="@color/white"
+            android:text="@{viewModel.description, default=@string/guide_description_1}"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/margin_large">
+
+            <ImageView
+                android:id="@+id/iv_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:scaleType="center"
+                android:src="@{viewModel.imageRes, default=@drawable/guide_1}"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
+
+
+
+

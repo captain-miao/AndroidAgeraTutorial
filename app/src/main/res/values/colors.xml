@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF4444</color>
+    <color name="colorPrimaryDark">#c9273a</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="text_check">#32c08c</color>
+    <color name="text_un_check">#d9e6f5</color>
+    <color name="dark">#333333</color>
+    <color name="light_gray">#666666</color>
+    <color name="bg_color">#c7c7c7</color>
+
+
+    <!-- guide -->
+    <color name="guide_bg_color_1">#56717B</color>
+    <color name="guide_bg_color_2">#d9a454</color>
+    <color name="guide_bg_color_3">#00A79D</color>
+</resources>

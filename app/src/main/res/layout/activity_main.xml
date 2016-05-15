@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="java.util.Map"/>
+        <import type="com.github.captain_miao.agera.tutorial.model.ActInfo"/>
+        <import type="com.github.captain_miao.agera.tutorial.listener.OnViewClickListener"/>
+        <variable name="map" type="Map&lt;String,ActInfo>"/>
+        <variable name="clickListener" type="OnViewClickListener"/>
+    </data>
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context="com.github.captain_miao.agera.tutorial.MainActivity">
+
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo='@{map["change_color"]}'
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo='@{map["change_image"]}'
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_fragment`]}"
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_recycle_view`]}"
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_view_page`]}"
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_base_observable`]}"
+                bind:clickListener="@{clickListener}"
+                />
+
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_observable`]}"
+                bind:clickListener="@{clickListener}"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+</layout>

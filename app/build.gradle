@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.github.captain_miao.agera.tutorial"
+        minSdkVersion this.minSdkVersion
+        targetSdkVersion this.targetSdkVersion
+        versionCode this.versionCode
+        versionName this.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    // enable dataBinding
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile "com.android.support:design:${this.supportLibrariesVersion}"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.captain-miao:recyclerviewutils:1.2.0-SNAPSHOT'
+
+    //agera
+    compile 'com.google.android.agera:agera:1.0.0-rc2'
+    compile 'com.google.android.agera:content:1.0.0-rc2'
+    compile 'com.google.android.agera:database:1.0.0-rc2'
+    compile 'com.google.android.agera:net:1.0.0-rc2'
+    compile 'com.google.android.agera:rvadapter:1.0.0-rc2'
+}

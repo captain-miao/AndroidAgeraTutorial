@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.github.captain_miao.agera.tutorial"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <data
+                    android:host="databinding"
+                    android:pathPrefix="/activity_main"
+                    android:scheme="tutorial"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.SimpleActivityA"
+            android:label="@string/Activity_A"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_a"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.SimpleActivityB"
+            android:label="@string/Activity_B"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_b"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.SimpleActivityC"
+            android:label="@string/Activity_C"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_c"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.recycleview.RecycleViewActivity"
+            android:label="@string/Activity_D"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_d"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.viewpage.ViewPageActivity"
+            android:label="@string/Activity_E"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppFullTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_e"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.recycleview.BaseObservableRecycleViewActivity"
+            android:label="@string/Activity_F"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_f"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.github.captain_miao.agera.tutorial.recycleview.ObservableRecycleViewActivity"
+            android:label="@string/Activity_G"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_g"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
+
+
+    </application>
+
+</manifest>
