@@ -2,7 +2,7 @@
 Android Agera Example.
 
 # Change Text Color
-## Click Button Send Update Event</h5>
+## Click Button Send Update Event
 
 ```
     //onClick Observable
@@ -57,5 +57,31 @@ Android Agera Example.
     }
 ```
 
+# Load Image By Picasso
+## Repository
+```
+
+    Supplier<String> imageUriSupplier = new Supplier<String>() {
+        @NonNull
+        @Override
+        public String get() {
+            return MockRandomData.getRandomImage();
+        }
+    };
+
+    mRepository = Repositories.repositoryWithInitialValue(Result.<Bitmap>absent())
+            .observe(mObservable)
+            .onUpdatesPerLoop()
+            .getFrom(imageUriSupplier)//image uri
+            .goTo(networkExecutor)
+            .thenTransform(new Function<String, Result<Bitmap>>() {
+                @NonNull
+                @Override
+                public Result<Bitmap> apply(@NonNull String input) {
+                    return new ImageSupplier(input).get();//image bitmap
+                }
+            })
+            .compile();
+```
 
 <br/>

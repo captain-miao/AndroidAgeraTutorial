@@ -3,7 +3,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="imgUrl" type="String"/>
+        <import type="com.github.captain_miao.agera.tutorial.observable.OnClickObservable"/>
+        <import type="android.graphics.Bitmap"/>
+        <variable name="observable" type="OnClickObservable"/>
+        <variable name="bitmap" type="Bitmap"/>
     </data>
 
     <LinearLayout
@@ -17,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="@{observable::onClick}"
             android:text="Change Image"/>
 
         <ImageView
@@ -26,7 +30,8 @@
             android:layout_gravity="center"
             android:scaleType="centerInside"
             android:clickable="false"
-            app:imageUrl='@{imgUrl ?? "http://ww1.sinaimg.cn/large/7a8aed7bjw1f2zwrqkmwoj20f00lg0v7.jpg"}'
+            app:imageUrl='@{"http://ww1.sinaimg.cn/large/7a8aed7bjw1f2zwrqkmwoj20f00lg0v7.jpg"}'
+            app:imageBitmap='@{bitmap}'
             app:error="@{@drawable/ic_image_load_error}"
             />
 

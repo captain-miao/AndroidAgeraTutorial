@@ -1,6 +1,7 @@
 package com.github.captain_miao.agera.tutorial.helper;
 
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
@@ -52,6 +53,11 @@ public class PicassoBinding {
     @BindingAdapter({"android:src"})
     public static void setImageViewResource(ImageView imageView, int resource) {
         imageView.setImageResource(resource);
+    }
+
+    @BindingAdapter("{imageBitmap}")
+    public static void setImageViewBitmap(ImageView iv, Bitmap bitmap) {
+       iv.setImageBitmap(bitmap);
     }
 
 //    @BindingAdapter({"imageUrl", "error", "android:clickable"})

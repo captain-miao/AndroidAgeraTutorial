@@ -21,7 +21,7 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
     @Override
     public void init(Bundle savedInstanceState) {
         mBinding = DataBindingUtil.setContentView(this, R.layout.change_txt_color);
-        initAgera();
+        setUpRepository();
         mBinding.setObservable(mObservable);
 
     }
@@ -44,7 +44,7 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
         mRepository.removeUpdatable(this);
     }
 
-    private void initAgera() {
+    private void setUpRepository() {
         mObservable = new OnClickObservable() {
             @Override
             public void onClick(View view) {

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.github.captain_miao.agera.tutorial.base.BaseFragment;
 import com.github.captain_miao.agera.tutorial.databinding.LoadImageByPicassoBinding;
-import com.github.captain_miao.agera.tutorial.helper.MockRandomData;
 
 /**
  * @author YanLu
@@ -38,7 +37,7 @@ public class SimpleFragmentC extends BaseFragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        mBinding.setImgUrl(MockRandomData.getRandomImage());
+        //mBinding.setImgUrl(MockRandomData.getRandomImage());
     }
 
 }
