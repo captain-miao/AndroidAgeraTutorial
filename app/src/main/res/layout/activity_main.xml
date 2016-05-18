@@ -36,7 +36,7 @@
 
             <include
                 layout="@layout/activity_item_view"
-                bind:actInfo="@{map[`with_fragment`]}"
+                bind:actInfo="@{map[`mutable_repository`]}"
                 bind:clickListener="@{clickListener}"
                 />
 

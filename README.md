@@ -56,7 +56,28 @@ Android Agera Example.
         mBinding.setTxtColor(mRepository.get());
     }
 ```
+# MutableRepository
+```
+    private void setUpRepository() {
+        mObservable = new OnClickObservable() {
+            @Override
+            public void onClick(View view) {
+                mRepository.accept(MockRandomData.getRandomImage());
+            }
+        };
 
+        mRepository = Repositories.mutableRepository(MockRandomData.getRandomImage());
+
+        //initialization
+        mRepository.accept(MockRandomData.getRandomImage());
+    }
+
+    @Override
+    public void update() {
+        String result = mRepository.get();
+        mBinding.setImageUrl(result);
+    }
+```
 # Load Image By Picasso
 ## Repository
 ```

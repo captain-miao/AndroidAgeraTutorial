@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="com.github.captain_miao.agera.tutorial.observable.OnClickObservable"/>
+        <variable name="observable" type="OnClickObservable"/>
+        <variable name="imageUrl" type="String"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_change_image"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:onClick="@{observable::onClick}"
+            android:text="Change Image"/>
+
+        <ImageView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:clickable="false"
+            app:imageUrl="@{imageUrl}"
+            app:error="@{@drawable/ic_image_load_error}"
+            />
+
+    </LinearLayout>
+</layout>

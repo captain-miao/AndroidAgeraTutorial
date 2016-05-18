@@ -7,14 +7,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.captain_miao.agera.tutorial.base.BaseFragment;
-import com.github.captain_miao.agera.tutorial.databinding.LoadImageByPicassoBinding;
+import com.github.captain_miao.agera.tutorial.databinding.LoadImageByUrlBinding;
+import com.github.captain_miao.agera.tutorial.helper.MockRandomData;
+import com.github.captain_miao.agera.tutorial.observable.OnClickObservable;
+import com.google.android.agera.MutableRepository;
+import com.google.android.agera.Repositories;
+import com.google.android.agera.Updatable;
 
 /**
  * @author YanLu
  * @since 16/4/26
  */
-public class SimpleFragmentC extends BaseFragment implements View.OnClickListener {
-    private LoadImageByPicassoBinding mBinding;
+public class SimpleFragmentC extends BaseFragment implements Updatable {
+    private LoadImageByUrlBinding mBinding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,19 +30,58 @@ public class SimpleFragmentC extends BaseFragment implements View.OnClickListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = LoadImageByPicassoBinding.inflate(inflater, container, false);
+        mBinding = LoadImageByUrlBinding.inflate(inflater, container, false);
         return mBinding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mBinding.btnChangeImage.setOnClickListener(this);
+        setUpRepository();
+        mBinding.setObservable(mObservable);
+    }
+
+
+    //for agera
+    private OnClickObservable mObservable;
+    private MutableRepository<String> mRepository;
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mRepository.addUpdatable(this);
     }
 
     @Override
-    public void onClick(View v) {
-        //mBinding.setImgUrl(MockRandomData.getRandomImage());
+    public void onPause() {
+        super.onPause();
+        mRepository.removeUpdatable(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void setUpRepository() {
+        mObservable = new OnClickObservable() {
+            @Override
+            public void onClick(View view) {
+                mRepository.accept(MockRandomData.getRandomImage());
+            }
+        };
+
+        mRepository = Repositories.mutableRepository(MockRandomData.getRandomImage());
+
+        //initialization
+        mRepository.accept(MockRandomData.getRandomImage());
+    }
+
+    @Override
+    public void update() {
+        String result = mRepository.get();
+        mBinding.setImageUrl(result);
     }
 
 }

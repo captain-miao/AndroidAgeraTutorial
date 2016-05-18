@@ -5,7 +5,7 @@
     <!-- activity list -->
     <string name="Activity_A">Change Text Color</string>
     <string name="Activity_B">Load Image</string>
-    <string name="Activity_C">With Fragment</string>
+    <string name="Activity_C">Mutable Repository</string>
     <string name="Activity_D">With Recycle View</string>
     <string name="Activity_E">With View Page</string>
     <string name="Activity_F">With BaseObservable</string>

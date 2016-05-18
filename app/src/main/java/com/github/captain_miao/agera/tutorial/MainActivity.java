@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements OnViewClickListen
     private Map<String, ActInfo> mActInfoMap = new HashMap<String, ActInfo>() {{
         put("change_color", new ActInfo("change_color", "tutorial://agera/activity_a"));
         put("change_image", new ActInfo("change_image", "tutorial://agera/activity_b"));
-        put("with_fragment", new ActInfo("with_fragment", "tutorial://agera/activity_c"));
+        put("mutable_repository", new ActInfo("mutable_repository", "tutorial://agera/activity_c"));
         put("with_recycle_view", new ActInfo("with_recycle_view", "tutorial://agera/activity_d"));
         put("with_view_page", new ActInfo("with_view_page", "tutorial://agera/activity_e"));
         put("with_base_observable", new ActInfo("with_base_observable", "tutorial://agera/activity_f"));
