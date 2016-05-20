@@ -1,8 +1,6 @@
 package com.github.captain_miao.agera.tutorial.observable;
 
 
-import android.view.View;
-
 import com.google.android.agera.BaseObservable;
 
 /**
@@ -10,5 +8,5 @@ import com.google.android.agera.BaseObservable;
  * @since 16/5/15
  */
 public abstract class OnClickObservable extends BaseObservable {
-    public abstract void onClick(View view);
+    public abstract void onClick( );
 }

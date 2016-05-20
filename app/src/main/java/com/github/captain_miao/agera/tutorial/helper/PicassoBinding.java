@@ -50,6 +50,23 @@ public class PicassoBinding {
         //Picasso.with(imageView.getContext()).load(url).into(imageView);
     }
 
+    @BindingAdapter({"compressImageUrl", "error"})
+    public static void loadImageCompress(ImageView imageView, String url, Drawable error) {
+        Picasso.Builder builder = new Picasso.Builder(imageView.getContext());
+        builder.listener(new Picasso.Listener() {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                exception.printStackTrace();
+                Log.e("Picasso Error", uri.toString());
+            }
+        });
+        builder.build()
+                .load(url)
+                .error(error)
+                .config(Bitmap.Config.ARGB_8888)
+                .into(imageView);
+    }
+
     @BindingAdapter({"android:src"})
     public static void setImageViewResource(ImageView imageView, int resource) {
         imageView.setImageResource(resource);

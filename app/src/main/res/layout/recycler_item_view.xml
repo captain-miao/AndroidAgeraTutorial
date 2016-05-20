@@ -3,21 +3,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="com.github.captain_miao.agera.tutorial.model.VehicleInfo" />
-        <import type="com.github.captain_miao.agera.tutorial.listener.OnViewClickListener"/>
-        <import type="android.view.View"/>
+        <import type="com.github.captain_miao.agera.tutorial.model.GirlInfo" />
 
         <variable
             name="info"
-            type="VehicleInfo"/>
-
-        <variable
-            name="itemCLick"
-            type="OnViewClickListener"/>
-
-        <variable
-            name="selectedCLick"
-            type="OnViewClickListener"/>
+            type="GirlInfo"/>
 
     </data>
 
@@ -26,87 +16,24 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_middle"
         android:background="@color/white"
-        android:onClick="@{itemCLick.onClick}"
         android:orientation="vertical">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/iv_vehicle_logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/padding_normal"
-                android:scaleType="centerInside"
-                app:imageUrl="@{info.logoUrl}"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/iv_vehicle_logo"
-                android:layout_toLeftOf="@+id/check_container"
-                android:layout_toRightOf="@+id/iv_vehicle_logo"
-                android:layout_toStartOf="@+id/check_container"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/padding_mini"
-                android:paddingStart="@dimen/padding_mini">
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{info.brand}"
-                    android:textColor="@color/dark"
-                    android:textSize="@dimen/font_size_headline"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/check_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:onClick="@{selectedCLick.onClick}"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/padding_mini"
-                android:paddingRight="@dimen/padding_mini"
-                >
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@{info.isSelected ? @drawable/ic_check_circle : @drawable/ic_uncheck_circle}"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:paddingTop="@dimen/padding_mini_half"
-                    android:text="@string/default_label"
-
-                    android:textColor="@{info.isSelected ? @color/text_check : @color/text_un_check}"
-                    />
-            </LinearLayout>
-
-        </RelativeLayout>
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_normal"
-            android:text="@{info.description}"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            app:compressImageUrl="@{info.url}"
+            app:error="@{@drawable/ic_image_load_error}"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_normal"
+            android:text="@{@string/create_time(info.createdAt)}"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/light_gray"
             android:textSize="@dimen/font_size_body"/>
     </LinearLayout>

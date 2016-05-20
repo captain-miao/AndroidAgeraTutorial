@@ -3,7 +3,6 @@ package com.github.captain_miao.agera.tutorial;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.github.captain_miao.agera.tutorial.base.BaseActivity;
 import com.github.captain_miao.agera.tutorial.databinding.ChangeTxtColorBinding;
@@ -47,7 +46,7 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
     private void setUpRepository() {
         mObservable = new OnClickObservable() {
             @Override
-            public void onClick(View view) {
+            public void onClick( ) {
                 dispatchUpdate();
             }
         };

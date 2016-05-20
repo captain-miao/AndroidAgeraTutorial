@@ -67,7 +67,7 @@ public class SimpleFragmentC extends BaseFragment implements Updatable {
     private void setUpRepository() {
         mObservable = new OnClickObservable() {
             @Override
-            public void onClick(View view) {
+            public void onClick( ) {
                 mRepository.accept(MockRandomData.getRandomImage());
             }
         };

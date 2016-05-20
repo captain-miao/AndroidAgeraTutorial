@@ -16,6 +16,7 @@
 
     <!-- string for label -->
     <string name="default_label">[Default]</string>
+    <string name="create_time">Create at: %s</string>
 
 
     <!-- guide -->

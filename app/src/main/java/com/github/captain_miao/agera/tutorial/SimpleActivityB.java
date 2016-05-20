@@ -3,7 +3,6 @@ package com.github.captain_miao.agera.tutorial;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.View;
 import android.widget.Toast;
 
 import com.github.captain_miao.agera.tutorial.base.BaseActivity;
@@ -63,7 +62,7 @@ public class SimpleActivityB extends BaseActivity implements Updatable {
         networkExecutor = Executors.newSingleThreadExecutor();
         mObservable = new OnClickObservable() {
             @Override
-            public void onClick(View view) {
+            public void onClick( ) {
                 dispatchUpdate();
             }
         };
