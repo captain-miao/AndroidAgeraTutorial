@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -62,8 +63,9 @@ public class PicassoBinding {
         });
         builder.build()
                 .load(url)
+                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .error(error)
-                .config(Bitmap.Config.ARGB_8888)
+                .config(Bitmap.Config.RGB_565)
                 .into(imageView);
     }
 

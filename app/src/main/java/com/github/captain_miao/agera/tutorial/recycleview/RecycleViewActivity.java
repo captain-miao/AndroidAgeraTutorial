@@ -122,9 +122,9 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                 mAdapter.addAll(result.get().results);
                 mRefreshRecyclerView.refreshComplete();
             } else {
-                mAdapter.addAll(result.get().results, false);
-                int size = result.get().results.size();
-                mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
+                mAdapter.addAll(result.get().results);
+                //int size = result.get().results.size();
+                //mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
                 mRefreshRecyclerView.loadMoreComplete();
             }
         } else {
