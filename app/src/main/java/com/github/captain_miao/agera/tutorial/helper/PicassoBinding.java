@@ -2,11 +2,13 @@ package com.github.captain_miao.agera.tutorial.helper;
 
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.github.captain_miao.agera.tutorial.R;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -51,8 +53,9 @@ public class PicassoBinding {
         //Picasso.with(imageView.getContext()).load(url).into(imageView);
     }
 
-    @BindingAdapter({"compressImageUrl", "error"})
-    public static void loadImageCompress(ImageView imageView, String url, Drawable error) {
+    @BindingAdapter({"compressImageUrl"})
+    public static void loadImageCompress(ImageView imageView, String url) {
+        //large -> b middle
         Picasso.Builder builder = new Picasso.Builder(imageView.getContext());
         builder.listener(new Picasso.Listener() {
             @Override
@@ -61,10 +64,18 @@ public class PicassoBinding {
                 Log.e("Picasso Error", uri.toString());
             }
         });
+        //recycle bitmap
+        Drawable drawable = imageView.getDrawable();
+        if (drawable instanceof BitmapDrawable) {
+            imageView.setImageDrawable(null);
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            Log.d(TAG, "recycle bitmap, w:" + bitmap.getWidth() + ", h:" + bitmap.getHeight());
+            bitmap.recycle();
+        }
         builder.build()
-                .load(url)
+                .load(url.replace("large", "bmiddle"))
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                .error(error)
+                .placeholder(R.drawable.ic_image_load_place_holder)
                 .config(Bitmap.Config.RGB_565)
                 .into(imageView);
     }
