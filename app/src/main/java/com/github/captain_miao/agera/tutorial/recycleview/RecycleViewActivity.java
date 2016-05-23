@@ -21,6 +21,7 @@ import com.google.android.agera.RepositoryConfig;
 import com.google.android.agera.Result;
 import com.google.android.agera.Supplier;
 import com.google.android.agera.Updatable;
+import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,6 +31,7 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
 
     private WrapperRecyclerView mRefreshRecyclerView;
     private VehicleListAdapter mAdapter;
+    private static Picasso sPicasso = null;
     @Override
     public void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_recycle_view);
@@ -42,6 +44,9 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
         mRefreshRecyclerView.setRecyclerViewListener(this);
         mAdapter.setLoadMoreFooterView(new DefaultLoadMoreFooterView(this));
         mRefreshRecyclerView.setPadding(0, 0, 0, 20);
+
+        mRefreshRecyclerView.getRecyclerView().addOnScrollListener(new PicassoOnScrollListener(this));
+
         setUpRepository();
     }
 
@@ -122,7 +127,9 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                 mAdapter.addAll(result.get().results);
                 mRefreshRecyclerView.refreshComplete();
             } else {
-                mAdapter.addAll(result.get().results);
+                if(result.get().results != null && result.get().results.size() > 0) {
+                    mAdapter.addAll(result.get().results);
+                }
                 //int size = result.get().results.size();
                 //mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
                 mRefreshRecyclerView.loadMoreComplete();
