@@ -55,7 +55,6 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
     public void onRefresh() {
         mPagination = 1;
         mObservable.update();
-        //mRefreshRecyclerView.getRecyclerView().getAdapter().notifyDataSetChanged();
     }
 
     @Override
@@ -128,10 +127,12 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                 mRefreshRecyclerView.refreshComplete();
             } else {
                 if(result.get().results != null && result.get().results.size() > 0) {
-                    mAdapter.addAll(result.get().results);
+                    mAdapter.addAll(result.get().results, false);
+                    int size = result.get().results.size();
+                    mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
+                } else {
+                    Toast.makeText(this, "It's no more data.", Toast.LENGTH_LONG).show();
                 }
-                //int size = result.get().results.size();
-                //mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
                 mRefreshRecyclerView.loadMoreComplete();
             }
         } else {

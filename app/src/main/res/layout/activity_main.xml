@@ -54,7 +54,7 @@
 
             <include
                 layout="@layout/activity_item_view"
-                bind:actInfo="@{map[`with_base_observable`]}"
+                bind:actInfo="@{map[`with_repository_adapter`]}"
                 bind:clickListener="@{clickListener}"
                 />
 

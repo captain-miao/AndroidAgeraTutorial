@@ -36,6 +36,7 @@ public class RepositoryAdapterRecycleViewActivity extends BaseActivity implement
 
         setUpRepository();
 
+        //can't add data
         mRepositoryAdapter = RepositoryAdapter.repositoryAdapter()
                 .add(mRepository, new GirlInfoPresenter())
                 .build();

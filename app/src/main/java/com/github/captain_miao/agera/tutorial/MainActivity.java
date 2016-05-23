@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements OnViewClickListen
         put("mutable_repository", new ActInfo("mutable_repository", "tutorial://agera/activity_c"));
         put("with_recycle_view", new ActInfo("with_recycle_view", "tutorial://agera/activity_d"));
         put("with_view_page", new ActInfo("with_view_page", "tutorial://agera/activity_e"));
-        put("with_base_observable", new ActInfo("with_base_observable", "tutorial://agera/activity_f"));
+        put("with_repository_adapter", new ActInfo("with_repository_adapter", "tutorial://agera/activity_f"));
         put("with_observable", new ActInfo("with_observable", "tutorial://agera/activity_g"));
     }};
 }
