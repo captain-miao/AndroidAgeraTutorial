@@ -3,7 +3,6 @@ package com.github.captain_miao.agera.tutorial.recycleview;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.Toast;
 
 import com.github.captain_miao.agera.tutorial.R;
 import com.github.captain_miao.agera.tutorial.base.BaseActivity;
@@ -12,7 +11,6 @@ import com.github.captain_miao.agera.tutorial.model.ApiResult;
 import com.github.captain_miao.agera.tutorial.model.GirlInfo;
 import com.github.captain_miao.agera.tutorial.supplier.GirlsSupplier;
 import com.github.captain_miao.recyclerviewutils.WrapperRecyclerView;
-import com.github.captain_miao.recyclerviewutils.common.DefaultLoadMoreFooterView;
 import com.github.captain_miao.recyclerviewutils.listener.RefreshRecyclerViewListener;
 import com.google.android.agera.Function;
 import com.google.android.agera.Repositories;
@@ -20,34 +18,35 @@ import com.google.android.agera.Repository;
 import com.google.android.agera.RepositoryConfig;
 import com.google.android.agera.Result;
 import com.google.android.agera.Supplier;
-import com.google.android.agera.Updatable;
-import com.squareup.picasso.Picasso;
+import com.google.android.agera.rvadapter.RepositoryAdapter;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class RecycleViewActivity extends BaseActivity implements RefreshRecyclerViewListener, Updatable {
-    private static final String TAG = "RecycleViewActivity";
+public class RepositoryAdapterRecycleViewActivity extends BaseActivity implements RefreshRecyclerViewListener {
+    private static final String TAG = "RepositoryAdapterRecycleViewActivity";
 
     private WrapperRecyclerView mRefreshRecyclerView;
-    private GirlListAdapter mAdapter;
-    private static Picasso sPicasso = null;
+    private RepositoryAdapter mRepositoryAdapter;
     @Override
     public void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_recycle_view);
         mRefreshRecyclerView = (WrapperRecyclerView) findViewById(R.id.refresh_recycler_view);
-        mAdapter = new GirlListAdapter();
-        mRefreshRecyclerView.setAdapter(mAdapter);
+
+        setUpRepository();
+
+        mRepositoryAdapter = RepositoryAdapter.repositoryAdapter()
+                .add(mRepository, new GirlInfoPresenter())
+                .build();
+
+        mRefreshRecyclerView.getRecyclerView().setAdapter(mRepositoryAdapter);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRefreshRecyclerView.setLayoutManager(linearLayoutManager);
         mRefreshRecyclerView.setRecyclerViewListener(this);
-        mAdapter.setLoadMoreFooterView(new DefaultLoadMoreFooterView(this));
+        mRefreshRecyclerView.disableLoadMore();
         mRefreshRecyclerView.setPadding(0, 0, 0, 20);
-
-        mRefreshRecyclerView.getRecyclerView().addOnScrollListener(new PicassoOnScrollListener(this));
-
-        setUpRepository();
     }
 
 
@@ -55,32 +54,30 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
     public void onRefresh() {
         mPagination = 1;
         mObservable.update();
-        //mRefreshRecyclerView.getRecyclerView().getAdapter().notifyDataSetChanged();
+        mRefreshRecyclerView.refreshComplete();
     }
 
     @Override
     public void onLoadMore(int pagination, int pageSize) {
-        mRefreshRecyclerView.showLoadMoreView();
-        mPagination = pagination;
-        mObservable.update();
+
     }
 
-
+    // Agera
     //for agera
     private ExecutorService networkExecutor;
     private SimpleObservable mObservable;
-    private Repository<Result<ApiResult<GirlInfo>>> mRepository;
+    private Repository<Result<List<GirlInfo>>> mRepository;
 
     @Override
      protected void onResume() {
          super.onResume();
-         mRepository.addUpdatable(this);
+        mRepositoryAdapter.startObserving();
      }
 
      @Override
      protected void onPause() {
          super.onPause();
-         mRepository.removeUpdatable(this);
+         mRepositoryAdapter.stopObserving();
      }
 
      @Override
@@ -88,14 +85,13 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
          super.onDestroy();
          networkExecutor.shutdown();
      }
-
     private int mPagination = 1;
      private void setUpRepository() {
          networkExecutor = Executors.newSingleThreadExecutor();
          mObservable = new SimpleObservable() { };
 
 
-         mRepository = Repositories.repositoryWithInitialValue(Result.<ApiResult<GirlInfo>>absent())
+         mRepository = Repositories.repositoryWithInitialValue(Result.<List<GirlInfo>>absent())
                  .observe(mObservable)
                  .onUpdatesPerLoop()
                  .goTo(networkExecutor)
@@ -106,37 +102,19 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                          return mPagination;
                      }
                  }))
-
-                 .thenTransform(new Function<Result<ApiResult<GirlInfo>>, Result<ApiResult<GirlInfo>>>() {
+                 .thenTransform(new Function<Result<ApiResult<GirlInfo>>, Result<List<GirlInfo>>>() {
                      @NonNull
                      @Override
-                     public Result<ApiResult<GirlInfo>> apply(@NonNull Result<ApiResult<GirlInfo>> input) {
-                         return input;
+                     public Result<List<GirlInfo>> apply(@NonNull Result<ApiResult<GirlInfo>> input) {
+                         if (input.succeeded() && !input.get().error) {
+                             return Result.success(input.get().results);
+                         } else {
+                             return Result.absent();
+                         }
                      }
                  })
                  .onDeactivation(RepositoryConfig.SEND_INTERRUPT)
                  .compile();
      }
 
-    @Override
-    public void update() {
-        Result<ApiResult<GirlInfo>> result = mRepository.get();
-        if (result.succeeded() && !result.get().error) {
-            if (mPagination == 1) {
-                mAdapter.clear();
-                mAdapter.addAll(result.get().results);
-                mRefreshRecyclerView.refreshComplete();
-            } else {
-                if(result.get().results != null && result.get().results.size() > 0) {
-                    mAdapter.addAll(result.get().results);
-                }
-                //int size = result.get().results.size();
-                //mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - size, size);
-                mRefreshRecyclerView.loadMoreComplete();
-            }
-        } else {
-            Toast.makeText(this, "load data fail", Toast.LENGTH_LONG).show();
-        }
-        mRefreshRecyclerView.hideFooterView();
-    }
 }

@@ -93,7 +93,7 @@
         </activity>
 
         <activity
-            android:name="com.github.captain_miao.agera.tutorial.recycleview.BaseObservableRecycleViewActivity"
+            android:name=".recycleview.RepositoryAdapterRecycleViewActivity"
             android:label="@string/Activity_F"
             android:screenOrientation="portrait">
             <intent-filter>

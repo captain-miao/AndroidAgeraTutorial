@@ -10,7 +10,7 @@ import com.github.captain_miao.recyclerviewutils.WrapperRecyclerView;
 import com.github.captain_miao.recyclerviewutils.listener.RefreshRecyclerViewListener;
 
 public class ObservableRecycleViewActivity extends BaseActivity implements RefreshRecyclerViewListener {
-    private static final String TAG = "BaseObservableRecycleViewActivity";
+    private static final String TAG = "RepositoryAdapterRecycleViewActivity";
 
     private WrapperRecyclerView mRefreshRecyclerView;
     @Override

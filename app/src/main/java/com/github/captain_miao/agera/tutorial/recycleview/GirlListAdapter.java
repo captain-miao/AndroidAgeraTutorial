@@ -19,12 +19,12 @@ import java.util.List;
  * @author YanLu
  * @since 16/4/27
  */
-public class VehicleListAdapter extends BaseWrapperRecyclerAdapter<GirlInfo, RecyclerView.ViewHolder> {
+public class GirlListAdapter extends BaseWrapperRecyclerAdapter<GirlInfo, RecyclerView.ViewHolder> {
 
-    public VehicleListAdapter() {
+    public GirlListAdapter() {
     }
 
-    public VehicleListAdapter(List<GirlInfo> items) {
+    public GirlListAdapter(List<GirlInfo> items) {
         addAll(items);
     }
 
@@ -33,7 +33,7 @@ public class VehicleListAdapter extends BaseWrapperRecyclerAdapter<GirlInfo, Rec
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_item_view, parent, false);
 
-        return new VehicleListAdapter.ViewHolder(view);
+        return new GirlListAdapter.ViewHolder(view);
     }
 
     @Override
