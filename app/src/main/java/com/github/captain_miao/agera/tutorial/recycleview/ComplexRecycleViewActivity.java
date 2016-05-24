@@ -126,9 +126,9 @@ public class ComplexRecycleViewActivity extends BaseActivity implements RefreshR
                         if (mPagination == 1) {
                             mRefreshRecyclerView.refreshComplete();
                         } else {
-                            mRefreshRecyclerView.loadMoreComplete();
                             mRefreshRecyclerView.hideFooterView();
                         }
+                        mRefreshRecyclerView.loadMoreComplete();
                     }
                 });
 
