@@ -60,7 +60,7 @@
 
             <include
                 layout="@layout/activity_item_view"
-                bind:actInfo="@{map[`with_observable`]}"
+                bind:actInfo="@{map[`with_complex_recycle_view`]}"
                 bind:clickListener="@{clickListener}"
                 />
         </LinearLayout>

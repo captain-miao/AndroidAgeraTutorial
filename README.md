@@ -28,7 +28,7 @@ Android Agera Example.
             return MockRandomData.getRandomColor();
         }
     };
-    //
+    
     mRepository = Repositories.repositoryWithInitialValue(0)
             .observe(mObservable)
             .onUpdatesPerLoop()
@@ -105,4 +105,25 @@ Android Agera Example.
             .compile();
 ```
 
+# Load Data By Network
+## Repository
+```
+    // Observable and Supplier
+    mMutableRepository = Repositories.mutableRepository(mPagination);
+
+    mLoadDataRepository = Repositories.repositoryWithInitialValue(Result.<ApiResult<GirlInfo>>absent())
+            .observe(mMutableRepository)
+            .onUpdatesPerLoop()
+            .goTo(networkExecutor)
+            .attemptGetFrom(new GirlsSupplier(mMutableRepository)).orSkip()
+            .goLazy()
+            .thenTransform(new Function<ApiResult<GirlInfo>, Result<ApiResult<GirlInfo>>>() {
+                @NonNull
+                @Override
+                public Result<ApiResult<GirlInfo>> apply(@NonNull ApiResult<GirlInfo> input) {
+                    return absentIfNull(input);
+                }
+            })
+            .compile();
+```
 <br/>

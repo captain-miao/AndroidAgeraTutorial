@@ -11,7 +11,7 @@ import com.google.android.agera.Supplier;
 
 import java.io.IOException;
 
-import static com.google.android.agera.Result.absentIfNull;
+import static com.google.android.agera.Result.absent;
 
 /**
  * @author YanLu
@@ -39,8 +39,11 @@ public class GirlsSupplier implements Supplier<Result<ApiResult<GirlInfo>>> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return absentIfNull(girlInfos);
+        if(girlInfos != null){
+            return !girlInfos.error ? Result.success(girlInfos) : Result.<ApiResult<GirlInfo>>failure();
+        } else {
+            return absent();
+        }
     }
 
 

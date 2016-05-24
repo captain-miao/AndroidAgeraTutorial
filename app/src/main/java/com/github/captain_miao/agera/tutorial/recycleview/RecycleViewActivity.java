@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.github.captain_miao.agera.tutorial.R;
 import com.github.captain_miao.agera.tutorial.base.BaseActivity;
+import com.github.captain_miao.agera.tutorial.helper.PicassoOnScrollListener;
 import com.github.captain_miao.agera.tutorial.listener.SimpleObservable;
 import com.github.captain_miao.agera.tutorial.model.ApiResult;
 import com.github.captain_miao.agera.tutorial.model.GirlInfo;
@@ -14,14 +15,13 @@ import com.github.captain_miao.agera.tutorial.supplier.GirlsSupplier;
 import com.github.captain_miao.recyclerviewutils.WrapperRecyclerView;
 import com.github.captain_miao.recyclerviewutils.common.DefaultLoadMoreFooterView;
 import com.github.captain_miao.recyclerviewutils.listener.RefreshRecyclerViewListener;
-import com.google.android.agera.Function;
+import com.google.android.agera.Functions;
 import com.google.android.agera.Repositories;
 import com.google.android.agera.Repository;
 import com.google.android.agera.RepositoryConfig;
 import com.google.android.agera.Result;
 import com.google.android.agera.Supplier;
 import com.google.android.agera.Updatable;
-import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -31,7 +31,6 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
 
     private WrapperRecyclerView mRefreshRecyclerView;
     private GirlListAdapter mAdapter;
-    private static Picasso sPicasso = null;
     @Override
     public void init(Bundle savedInstanceState) {
         setContentView(R.layout.activity_recycle_view);
@@ -106,13 +105,7 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                      }
                  }))
 
-                 .thenTransform(new Function<Result<ApiResult<GirlInfo>>, Result<ApiResult<GirlInfo>>>() {
-                     @NonNull
-                     @Override
-                     public Result<ApiResult<GirlInfo>> apply(@NonNull Result<ApiResult<GirlInfo>> input) {
-                         return input;
-                     }
-                 })
+                 .thenTransform(Functions.<Result<ApiResult<GirlInfo>>>identityFunction())
                  .onDeactivation(RepositoryConfig.SEND_INTERRUPT)
                  .compile();
      }

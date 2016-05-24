@@ -1,4 +1,4 @@
-package com.github.captain_miao.agera.tutorial.recycleview;
+package com.github.captain_miao.agera.tutorial.helper;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -106,7 +106,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.github.captain_miao.agera.tutorial.recycleview.ObservableRecycleViewActivity"
+            android:name=".recycleview.ComplexRecycleViewActivity"
             android:label="@string/Activity_G"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -12,6 +12,7 @@ import com.github.captain_miao.agera.tutorial.helper.MockRandomData;
 import com.github.captain_miao.agera.tutorial.observable.OnClickObservable;
 import com.google.android.agera.MutableRepository;
 import com.google.android.agera.Repositories;
+import com.google.android.agera.Result;
 import com.google.android.agera.Updatable;
 
 /**
@@ -44,7 +45,7 @@ public class SimpleFragmentC extends BaseFragment implements Updatable {
 
     //for agera
     private OnClickObservable mObservable;
-    private MutableRepository<String> mRepository;
+    private MutableRepository<Result<String>> mRepository;
 
 
     @Override
@@ -68,20 +69,22 @@ public class SimpleFragmentC extends BaseFragment implements Updatable {
         mObservable = new OnClickObservable() {
             @Override
             public void onClick( ) {
-                mRepository.accept(MockRandomData.getRandomImage());
+                mRepository.accept(Result.success(MockRandomData.getRandomImage()));
             }
         };
 
-        mRepository = Repositories.mutableRepository(MockRandomData.getRandomImage());
+        mRepository = Repositories.mutableRepository(Result.success(MockRandomData.getRandomImage()));
 
         //initialization
-        mRepository.accept(MockRandomData.getRandomImage());
+        //mRepository.accept(Result.success(MockRandomData.getRandomImage()));
     }
 
     @Override
     public void update() {
-        String result = mRepository.get();
-        mBinding.setImageUrl(result);
+        if(mRepository.get().succeeded()) {
+            String result = mRepository.get().get();
+            mBinding.setImageUrl(result);
+        }
     }
 
 }

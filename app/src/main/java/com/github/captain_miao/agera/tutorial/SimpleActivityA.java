@@ -10,6 +10,7 @@ import com.github.captain_miao.agera.tutorial.helper.MockRandomData;
 import com.github.captain_miao.agera.tutorial.observable.OnClickObservable;
 import com.google.android.agera.Repositories;
 import com.google.android.agera.Repository;
+import com.google.android.agera.Result;
 import com.google.android.agera.Supplier;
 import com.google.android.agera.Updatable;
 
@@ -19,16 +20,16 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
 
     @Override
     public void init(Bundle savedInstanceState) {
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.change_txt_color);
         setUpRepository();
         mBinding.setObservable(mObservable);
-
     }
 
 
     //for agera
     private OnClickObservable mObservable;
-    private Repository<Integer> mRepository;
+    private Repository<Result<Integer>> mRepository;
 
 
     @Override
@@ -50,15 +51,15 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
                 dispatchUpdate();
             }
         };
-        Supplier<Integer> supplier = new Supplier<Integer>() {
+        Supplier<Result<Integer>> supplier = new Supplier<Result<Integer>>() {
             @NonNull
             @Override
-            public Integer get() {
-                return MockRandomData.getRandomColor();
+            public Result<Integer> get() {
+                return Result.success(MockRandomData.getRandomColor());
             }
         };
 
-        mRepository = Repositories.repositoryWithInitialValue(0)
+        mRepository = Repositories.repositoryWithInitialValue(Result.<Integer>absent())
                 .observe(mObservable)
                 .onUpdatesPerLoop()
                 .thenGetFrom(supplier)
@@ -67,6 +68,8 @@ public class SimpleActivityA extends BaseActivity implements Updatable {
 
     @Override
     public void update() {
-        mBinding.setTxtColor(mRepository.get());
+        if(mRepository.get().succeeded()) {
+            mBinding.setTxtColor(mRepository.get().get());
+        }
     }
 }

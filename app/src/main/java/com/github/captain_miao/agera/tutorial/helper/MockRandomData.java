@@ -1,11 +1,8 @@
 package com.github.captain_miao.agera.tutorial.helper;
 
-import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.graphics.Color;
 
-import com.github.captain_miao.agera.tutorial.model.BaseObservableVehicleInfo;
-import com.github.captain_miao.agera.tutorial.model.ObservableVehicleInfo;
 import com.github.captain_miao.agera.tutorial.model.VehicleInfo;
 
 import java.security.SecureRandom;
@@ -40,20 +37,7 @@ public class MockRandomData {
     public static List<VehicleInfo> getVehicleInfos(){
         return sVehicleInfos;
     }
-    public static List<ObservableVehicleInfo> getObservableVehicleInfos(){
-        ObservableArrayList<ObservableVehicleInfo> vehicleInfos = new ObservableArrayList<>();
-        for (VehicleInfo vehicleInfo : sVehicleInfos) {
-            vehicleInfos.add(new ObservableVehicleInfo(vehicleInfo));
-        }
-        return vehicleInfos;
-    }
-    public static List<BaseObservableVehicleInfo> getBaseObservableVehicleInfos(){
-        List<BaseObservableVehicleInfo> vehicleInfos = new ArrayList<>();
-        for (VehicleInfo vehicleInfo : sVehicleInfos) {
-            vehicleInfos.add(new BaseObservableVehicleInfo(vehicleInfo));
-        }
-        return vehicleInfos;
-    }
+
 
     private static List<VehicleInfo> sVehicleInfos = new ArrayList<VehicleInfo>(){{
         add(new VehicleInfo(new ObservableBoolean(true),  "http://www.carlogos.org/uploads/car-logos/Bugatti-logo-1.jpg",

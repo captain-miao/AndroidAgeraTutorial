@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.github.captain_miao.agera.tutorial.R;
-import com.github.captain_miao.agera.tutorial.recycleview.PicassoOnScrollListener;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
