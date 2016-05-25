@@ -19,6 +19,7 @@ import com.google.android.agera.MutableRepository;
 import com.google.android.agera.Receiver;
 import com.google.android.agera.Repositories;
 import com.google.android.agera.Repository;
+import com.google.android.agera.RepositoryConfig;
 import com.google.android.agera.Result;
 import com.google.android.agera.Updatable;
 
@@ -102,7 +103,6 @@ public class ComplexRecycleViewActivity extends BaseActivity implements RefreshR
                 .onUpdatesPerLoop()
                 .goTo(networkExecutor)
                 .attemptGetFrom(new GirlsSupplier(mMutableRepository)).orSkip()
-                .goLazy()
                 .thenTransform(new Function<ApiResult<GirlInfo>, Result<ApiResult<GirlInfo>>>() {
                     @NonNull
                     @Override
@@ -110,6 +110,7 @@ public class ComplexRecycleViewActivity extends BaseActivity implements RefreshR
                         return absentIfNull(input);
                     }
                 })
+                .onDeactivation(RepositoryConfig.SEND_INTERRUPT)
                 .compile();
 
     }

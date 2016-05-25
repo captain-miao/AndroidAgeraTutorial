@@ -126,4 +126,20 @@ Android Agera Example.
             })
             .compile();
 ```
+
+# UiThreadExecutor
+```
+public class UiThreadExecutor implements Executor {
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    @Override
+    public void execute(Runnable command) {
+        mHandler.post(command);
+    }
+
+    // how to release it?
+    public static Executor newUiThreadExecutor() {
+        return new UiThreadExecutor();
+    }
+}
+```
 <br/>

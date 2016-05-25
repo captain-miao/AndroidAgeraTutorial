@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.github.captain_miao.agera.tutorial.R;
 import com.github.captain_miao.agera.tutorial.base.BaseActivity;
 import com.github.captain_miao.agera.tutorial.helper.PicassoOnScrollListener;
+import com.github.captain_miao.agera.tutorial.helper.UiThreadExecutor;
 import com.github.captain_miao.agera.tutorial.listener.SimpleObservable;
 import com.github.captain_miao.agera.tutorial.model.ApiResult;
 import com.github.captain_miao.agera.tutorial.model.GirlInfo;
@@ -15,7 +16,7 @@ import com.github.captain_miao.agera.tutorial.supplier.GirlsSupplier;
 import com.github.captain_miao.recyclerviewutils.WrapperRecyclerView;
 import com.github.captain_miao.recyclerviewutils.common.DefaultLoadMoreFooterView;
 import com.github.captain_miao.recyclerviewutils.listener.RefreshRecyclerViewListener;
-import com.google.android.agera.Functions;
+import com.google.android.agera.Function;
 import com.google.android.agera.Repositories;
 import com.google.android.agera.Repository;
 import com.google.android.agera.RepositoryConfig;
@@ -23,6 +24,7 @@ import com.google.android.agera.Result;
 import com.google.android.agera.Supplier;
 import com.google.android.agera.Updatable;
 
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -66,6 +68,7 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
 
     //for agera
     private ExecutorService networkExecutor;
+    private Executor uiExecutor;
     private SimpleObservable mObservable;
     private Repository<Result<ApiResult<GirlInfo>>> mRepository;
 
@@ -90,12 +93,22 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
     private int mPagination = 1;
      private void setUpRepository() {
          networkExecutor = Executors.newSingleThreadExecutor();
+         uiExecutor = UiThreadExecutor.newUiThreadExecutor();
          mObservable = new SimpleObservable() { };
 
 
          mRepository = Repositories.repositoryWithInitialValue(Result.<ApiResult<GirlInfo>>absent())
                  .observe(mObservable)
                  .onUpdatesPerLoop()
+                 //.goTo(uiExecutor)
+                 .getFrom(new Supplier<Object>() {
+                     @NonNull
+                     @Override
+                     public Object get() {
+                         Toast.makeText(RecycleViewActivity.this, "load data begin", Toast.LENGTH_LONG).show();
+                         return new Object();
+                     }
+                 })
                  .goTo(networkExecutor)
                  .getFrom(new GirlsSupplier(new Supplier<Integer>() {
                      @NonNull
@@ -105,7 +118,15 @@ public class RecycleViewActivity extends BaseActivity implements RefreshRecycler
                      }
                  }))
 
-                 .thenTransform(Functions.<Result<ApiResult<GirlInfo>>>identityFunction())
+                 .goTo(uiExecutor)
+                 .thenTransform(new Function<Result<ApiResult<GirlInfo>>, Result<ApiResult<GirlInfo>>>() {
+                     @NonNull
+                     @Override
+                     public Result<ApiResult<GirlInfo>> apply(@NonNull Result<ApiResult<GirlInfo>> input) {
+                         Toast.makeText(RecycleViewActivity.this, "load data end", Toast.LENGTH_LONG).show();
+                         return input;
+                     }
+                 })
                  .onDeactivation(RepositoryConfig.SEND_INTERRUPT)
                  .compile();
      }
