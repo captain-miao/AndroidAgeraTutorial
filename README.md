@@ -1,5 +1,6 @@
 # AndroidAgeraTutorial
-Android Agera Example.
+Android Agera Example.  
+## [AgeraTutorial-CN](https://yanlu.me/android-agera-tutorial-00/)
 
 # Change Text Color
 ## Click Button Send Update Event
