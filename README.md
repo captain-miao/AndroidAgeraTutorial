@@ -1,5 +1,6 @@
 # AndroidAgeraTutorial
 Android Agera Example.  
+## [Agera-Wiki-CN](https://github.com/captain-miao/AndroidAgeraTutorial/wiki)
 ## [AgeraTutorial-CN](https://yanlu.me/android-agera-tutorial-00/)
 
 # Change Text Color
