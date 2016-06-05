@@ -2,6 +2,7 @@
     <string name="app_name">AgeraDemo</string>
 
     <string name="button_change_color">Change Color</string>
+    <string name="button_reservoir">Reservoir</string>
     <!-- activity list -->
     <string name="Activity_A">Change Text Color</string>
     <string name="Activity_B">Load Image</string>
@@ -10,6 +11,7 @@
     <string name="Activity_E">With View Page</string>
     <string name="Activity_F">With RepositoryAdapter</string>
     <string name="Activity_G">With Complex RecycleView</string>
+    <string name="Activity_H">With Reservoir</string>
 
 
 
@@ -17,6 +19,7 @@
     <!-- string for label -->
     <string name="default_label">[Default]</string>
     <string name="create_time">Create at: %s</string>
+    <string name="count_time">Count: %d</string>
 
 
     <!-- guide -->

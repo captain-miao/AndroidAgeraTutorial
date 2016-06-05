@@ -63,6 +63,11 @@
                 bind:actInfo="@{map[`with_complex_recycle_view`]}"
                 bind:clickListener="@{clickListener}"
                 />
+            <include
+                layout="@layout/activity_item_view"
+                bind:actInfo="@{map[`with_reservoir`]}"
+                bind:clickListener="@{clickListener}"
+                />
         </LinearLayout>
 
     </ScrollView>
