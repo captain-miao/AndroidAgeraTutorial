@@ -5,6 +5,8 @@
 
 Android Agera Example.  
 
+![screenshot](https://raw.githubusercontent.com/captain-miao/me.github.com/master/agera/agera-screenshot.png)
+
 # Change Text Color
 ## Click Button Send Update Event
 
