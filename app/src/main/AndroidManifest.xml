@@ -135,6 +135,19 @@
                     android:scheme="tutorial"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SimpleActivityI"
+            android:label="@string/Activity_I"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="agera"
+                    android:pathPrefix="/activity_i"
+                    android:scheme="tutorial"/>
+            </intent-filter>
+        </activity>
 
 
     </application>

@@ -3,6 +3,7 @@
 
     <string name="button_change_color">Change Color</string>
     <string name="button_reservoir">Reservoir</string>
+    <string name="button_functions">Change Image Size</string>
     <!-- activity list -->
     <string name="Activity_A">Change Text Color</string>
     <string name="Activity_B">Load Image</string>
@@ -12,6 +13,7 @@
     <string name="Activity_F">With RepositoryAdapter</string>
     <string name="Activity_G">With Complex RecycleView</string>
     <string name="Activity_H">With Reservoir</string>
+    <string name="Activity_I">With Functions</string>
 
 
 

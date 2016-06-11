@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.github.captain_miao.agera.tutorial.observable.OnClickObservable"/>
+        <import type="android.graphics.Bitmap"/>
+        <variable name="observable" type="OnClickObservable"/>
+        <variable name="bitmap" type="Bitmap"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:scaleType="fitCenter"
+            android:clickable="false"
+            app:imageUrl='@{"http://ww1.sinaimg.cn/large/7a8aed7bjw1f2zwrqkmwoj20f00lg0v7.jpg"}'
+            app:imageBitmap='@{bitmap}'
+            app:error="@{@drawable/ic_image_load_error}"
+            />
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_big"
+            android:onClick="@{() -> observable.onClick()}"
+            android:text="@string/button_functions"/>
+
+    </RelativeLayout>
+
+</layout>

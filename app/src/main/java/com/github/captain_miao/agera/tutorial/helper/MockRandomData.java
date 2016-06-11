@@ -62,6 +62,7 @@ public class MockRandomData {
                 "LaFerrari", "The horse was initially the sign of the famous Count Francesco Baracca. He was a legendary professional of the air force of Italy at the World War I, who depicted it on the wing of his planes. Francesco Baracca died very yearly on June 19 in 1918, shot down later on 34 victorious fightings and many team triumphs."));
     }};
 
+    // large bmiddle small
     private static String[] sErrorImages = new String[]{
             "http://ww1.sinaimg.cn/large/7a8aed7bjw1f2sm0ns82hj20f00l8tb9.jpg_error",
             "http://ww4.sinaimg.cn/large/7a8aed7bjw1f2tpr3im0mj20f00l6q4o.jpg",
@@ -75,7 +76,13 @@ public class MockRandomData {
             "http://ww2.sinaimg.cn/large/7a8aed7bjw1f340c8jrk4j20j60srgpf.jpg"
     };
 
-    private static String[] sImages = new String[]{
+    public static String[] sImageSize = new String[]{
+            "large",
+            "bmiddle",
+            "small"
+    };
+
+    public static String[] sImages = new String[]{
             "http://ww1.sinaimg.cn/large/7a8aed7bjw1f2sm0ns82hj20f00l8tb9.jpg",
             "http://ww4.sinaimg.cn/large/7a8aed7bjw1f2tpr3im0mj20f00l6q4o.jpg",
             "http://ww4.sinaimg.cn/large/610dc034jw1f2uyg3nvq7j20gy0p6myx.jpg",
