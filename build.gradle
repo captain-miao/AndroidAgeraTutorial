@@ -22,12 +22,12 @@ allprojects {
 
 
 subprojects {
-    ext.compileSdkVersion = 23
-    ext.buildToolsVersion = '23.0.3'
-    ext.supportLibrariesVersion = '23.4.0'
+    ext.compileSdkVersion = 24
+    ext.buildToolsVersion = '24.0.0'
+    ext.supportLibrariesVersion = '24.1.1'
     ext.minSdkVersion = '14'
     ext.targetSdkVersion = '23'
-    ext.ageraLibrariesVersion = '1.1.0-beta2'
+    ext.ageraLibrariesVersion = '1.1.0'
 
 
     ext.versionCode = 1
