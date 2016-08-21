@@ -41,8 +41,7 @@ dependencies {
     compile "com.google.android.agera:content:${this.ageraLibrariesVersion}"
     compile "com.google.android.agera:database:${this.ageraLibrariesVersion}"
     compile "com.google.android.agera:net:${this.ageraLibrariesVersion}"
-    //compile "com.google.android.agera:rvadapter:${this.ageraLibrariesVersion}"
-    compile "com.google.android.agera:rvadapter:1.1.0"
+    compile "com.google.android.agera:rvadapter:${this.ageraLibrariesVersion}"
 
     //okhttp and retrofit
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
